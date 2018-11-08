@@ -1,0 +1,84 @@
+<!doctype html>
+<html data-framework="vue">
+	<head>
+		<meta charset="utf-8">
+		<title>Vidéothèque</title>
+		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+		<link rel="stylesheet" href="css/index.css">
+	</head>
+	<body>
+		<section class="todoapp">
+			<header class="header">
+				<h1>Vidéothèque</h1>
+			</header>
+			<section class="filter">
+				<ul class="tags-list">
+					<!--<li class="todo"><a href="#/videos/test,tag">Test</a></li>-->
+					<li class="tag"><a href="#/all" :class="{selected: visibility == 'all'}">Toutes</a></li>
+					<li class="tag"  v-for="tag in availableTags">
+						<a :href="tagHref(tag)" :class="{selected: visibility == url(tag)}">{{tag}}</a>
+					</li>
+				<ul>
+					
+			</section>
+			<section class="main">
+				<ul class="todo-list">
+					<!--<li class="todo"><a href="#/video/test">Test</a></li>-->
+					<li class="todo" v-for="todo in filteredTodos" :key="todo.id">
+						<div class="view">
+							<input class="toggle" type="checkbox" v-model="todo.completed">
+							<label @click="selectVideo(todo)">{{todo.title}} ({{todo.tags.join(',')}})</label>
+							<img :src=todo.thumbnail class="thumbnail"/>
+							<button class="destroy" @click="removeTodo(todo)"></button>
+						</div>
+					</li>
+				</ul>
+			</section>
+			<input class="new-todo" autofocus autocomplete="off" placeholder="Ajouter une viédo (URL youtube)" v-model="newTodo" @keyup.enter="addTodo"/>
+			<button @click="exportData">Export</button>
+			<button @click="importData">import</button>
+
+			<section class="video-container">
+				<h2><input v-model="currentVideo.title"/></h2>
+				<iframe width="560" height="315" :src="currentVideo.src" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<div class="video-infos">
+					<ul class="tags-list">
+						<li class="tag"  v-for="tag in currentVideo.tags">
+							{{tag}}
+							<button class="destroy" @click="removeTag(tag)"></button>
+						</li>
+					</ul>
+					<label>Ajouter un tag:</label>
+					<ul class="tags-list">
+						<li class="tag"  v-for="tag in availableTags" @click="addTag(tag)">
+							{{tag}}
+						</li>
+						<li class="tag">
+							<input v-model="newTag" @keyup.enter="createTag" placeholde="Ajouter un tag..."/>
+						</li>
+					</ul>
+					<label>Description:</label>
+					<textarea v-model="currentVideo.description"></textarea>
+					<label>Chaine: {{currentVideo.channel}}</label>
+					<label>Tags youtube:</label>
+					<ul class="tags-list">
+						<li class="tag"  v-for="tag in currentVideo.ytTags">
+							{{tag}}
+						</li>
+					</ul>
+				</div>
+			</section>
+		</section>
+		<footer class="info">
+			<p>Written by <a href="http://centime.org">Centime</a></p>
+		</footer>v
+		<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="node_modules/urlize/index.js"></script>
+		<script type="text/javascript" src="node_modules/todomvc-common/base.js"></script>
+		<script type="text/javascript" src="node_modules/director/build/director.js"></script>
+		<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+		<script type="text/javascript" src="js/store.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/routes.js"></script>
+	</body>
+</html>
