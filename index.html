@@ -35,8 +35,12 @@
 				</ul>
 			</section>
 			<input class="new-todo" autofocus autocomplete="off" placeholder="Ajouter une viédo (URL youtube)" v-model="newTodo" @keyup.enter="addTodo"/>
-			<button @click="exportData">Export</button>
-			<button @click="importData">import</button>
+			<div class="controls">
+				<button @click="setApiKey">Youtube API key</button>
+				<button @click="importData">Import</button>
+				<button @click="exportData">Export</button>
+				<a href="https://github.com/centime/videotheque/">Github</a>
+			</div>
 
 			<section class="video-container">
 				<h2><input v-model="currentVideo.title"/></h2>

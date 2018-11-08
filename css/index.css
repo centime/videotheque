@@ -64,6 +64,13 @@
 	content: '×';
 }
 
+.controls {
+	float: right;
+}
+.controls * {
+	padding: 5px;
+}
+
 
 /* Generic CSS*/
 

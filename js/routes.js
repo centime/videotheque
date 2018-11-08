@@ -16,10 +16,10 @@
 	// 	// app.currentVideoId = id;
 	// });
 
-	router.on('videos/:tags', function (tags) {
-		console.log('video list selected from tags: '+tags.split('-'));
-		app.selectedTags = tags.split('-');
-	});
+	// router.on('videos/:tags', function (tags) {
+	// 	console.log('video list selected from tags: '+tags.split('-'));
+	// 	app.selectedTags = tags.split('-');
+	// });
 
 	router.on('all', function () {
 		app.visibility = 'all';
@@ -27,7 +27,8 @@
 
 	// todo bind it dynamically
 	app.availableTags.forEach(function (visibility) {
-		router.on(visibility, function () {
+		console.log(visibility);
+		router.on(app.url(visibility), function () {
 			app.visibility = visibility;
 		});
 	});

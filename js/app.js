@@ -4,6 +4,10 @@
 
 	'use strict';
 
+	// get your own API key
+	// https://console.developers.google.com/apis/library
+	var ytApiKey = "AIzaSyBexCX3lDNBY4uEyu07zIRCB8xq82C_oBU";
+
 	var inArray = function (val, array) {
 		return array.indexOf(val) >= 0
 	}
@@ -89,7 +93,7 @@
 				// https://developers.google.com/apis-explorer/?hl=fr#p/youtube/v3/
 				// https://console.developers.google.com/apis/credentials?project=perso-dev-221809
 				$.getJSON("https://www.googleapis.com/youtube/v3/videos", {
-				  key: "AIzaSyBexCX3lDNBY4uEyu07zIRCB8xq82C_oBU", // dev only: localhost, centime.org
+				  key: ytApiKey,
 				  part: "snippet,statistics",
 				  id: id
 				}, function(data) {
@@ -208,6 +212,11 @@
 				var json = JSON.parse(str);
 				this.todos = json.videos;
 				this.availableTags = json.tags;
+			},
+
+			setApiKey: function() {
+				var key = prompt('get your own Youtube Public Data API key: https://console.developers.google.com/apis/library');
+				ytApiKey = key;
 			}
 		},
 
